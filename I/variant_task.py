@@ -23,7 +23,7 @@ def execute(spark):
     calculate_average_income(df)
     select_countryside_women_income(df)
     count_no_laptop_male_students(df)
-    sort_no_laptop_users_by_age(df)
+    sort_laptop_users_by_age(df)
 
 
 def calculate_average_income(df):
@@ -49,8 +49,8 @@ def count_no_laptop_male_students(df):
           no_latop_male_students_count, '\n')
 
 
-def sort_no_laptop_users_by_age(df):
-    sorted_no_laptop_users = df.where(fn.col('Has Laptop') == 'yes') \
+def sort_laptop_users_by_age(df):
+    sorted_laptop_users = df.where(fn.col('Has Laptop') == 'yes') \
         .orderBy('Age', ascending=False)
 
-    sorted_no_laptop_users.show()
+    sorted_laptop_users.show()
