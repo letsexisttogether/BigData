@@ -25,6 +25,9 @@ def execute(spark):
     count_no_laptop_male_students(df)
     sort_laptop_users_by_age(df)
 
+    table = df.groupBy('Gender').count()
+    table.show()
+
 
 def calculate_average_income(df):
     average_income_df = df.where(fn.col('Occupation') == 'banker') \

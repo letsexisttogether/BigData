@@ -1,5 +1,4 @@
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
-import pyspark.sql.functions as fn
 
 
 DATASETS = 'D:/RegretALot/Subjects/BigData/Datasets/'
@@ -26,7 +25,8 @@ def execute(spark):
     task_3(spark)
     table = task_4(spark)
 
-    save_table(table)
+    # save_table(table)
+
 
 def task_1(spark):
     table = spark.sql('SELECT Occupation, COLLECT_LIST(Age) as Ages \
@@ -42,7 +42,10 @@ def task_2(spark, max_ages_count):
 
     columns += [f'Ages[{i}] AS Age_{i + 1}' for i in range(max_ages_count)]
 
-    table = spark.sql(f'SELECT {", ".join(columns)} FROM GroupedLaptopUsers')
+    query = f'SELECT {", ".join(columns)} FROM GroupedLaptopUsers'
+    print(query)
+
+    table = spark.sql(query)
 
     table.show()
 
@@ -63,6 +66,10 @@ def task_4(spark):
     table = spark.sql('SELECT lpt.*, (avg.Average_income - lpt.Income) \
         AS IncomeDiff FROM LaptopUsers lpt \
         JOIN AverageIncomes avg ON lpt.Occupation = avg.Occupation')
+
+    table.createOrReplaceTempView('LaptopUsers')
+
+    table = spark.sql('SELECT * FROM LaptopUsers')
 
     table.show()
 
