@@ -1,6 +1,6 @@
 from pyspark.sql.functions import explode, split, col
 
-from names import GAMES_DATASETS, gamesSchema 
+from names import GAMES_DATASETS, gamesSchema
 
 
 def execute(spark):

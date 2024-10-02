@@ -4,6 +4,7 @@ from pyspark.sql.types import StructType, StructField, IntegerType, \
 DATASETS = 'D:/RegretALot/Subjects/BigData/Datasets/'
 VOTES_DATASETS = DATASETS + 'Votes/'
 GAMES_DATASETS = DATASETS + 'Games/'
+TEXT_DATASETS = DATASETS + 'Text/'
 
 unvotesSchema = StructType([
     StructField('rcid', IntegerType(), False),
